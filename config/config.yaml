@@ -1,0 +1,36 @@
+# LLM 配置
+llm:
+  provider: "openai"  # openai / zhipu / qwen
+  model: "gpt-3.5-turbo"
+  temperature: 0.3
+  max_tokens: 2000
+
+# Embedding 配置
+embedding:
+  provider: "openai"  # openai / huggingface / bge
+  model: "text-embedding-ada-002"
+  dimension: 1536
+
+# 向量数据库配置
+vector_store:
+  type: "chroma"  # chroma / milvus / faiss
+  persist_directory: "./chroma_db"
+  collection_name: "rag_knowledge_base"
+
+# 文本切片配置
+splitter:
+  chunk_size: 500
+  chunk_overlap: 50
+  separators: ["\n\n", "\n", "。", "！", "？", ".", " "]
+
+# 检索配置
+retriever:
+  top_k: 5
+  score_threshold: 0.5
+  use_rerank: true
+  rerank_model: "bge-reranker-base"
+
+# 服务配置
+server:
+  host: "0.0.0.0"
+  port: 8000

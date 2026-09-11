@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虚拟环境
+venv/
+env/
+.venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 数据
+data/*.pdf
+data/*.docx
+data/*.txt
+!data/.gitkeep
+
+# 向量数据库
+chroma_db/
+milvus_data/
+*.faiss
+
+# 日志
+*.log
+logs/
+
+# 系统
+.DS_Store
+Thumbs.db
