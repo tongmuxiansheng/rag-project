@@ -70,6 +70,8 @@ class QueryResponse(BaseModel):
     question: str
     answer: str
     sources: list
+    confidence: float = 0.0
+    answered: bool = True
 
 
 class UploadResponse(BaseModel):
