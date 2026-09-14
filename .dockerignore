@@ -4,21 +4,6 @@ __pycache__/
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 
 # 虚拟环境
 venv/
@@ -32,20 +17,18 @@ env/
 *.swp
 *.swo
 
+# 数据库
+chroma_db/
+test_chroma_db/
+test_rag_db/
+*.sqlite3
+*.bin
+
 # 数据
 data/*.pdf
 data/*.docx
 data/*.txt
 !data/.gitkeep
-
-# 向量数据库
-chroma_db/
-test_chroma_db/
-test_rag_db/
-milvus_data/
-*.faiss
-*.sqlite3
-*.bin
 
 # 日志
 *.log
@@ -54,3 +37,12 @@ logs/
 # 系统
 .DS_Store
 Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# 其他
+*.md
+docs/
+tests/

@@ -1,0 +1,19 @@
+# RAG 知识库系统 Docker Compose 配置
+# 使用方法：docker-compose up -d --build
+version: "3.8"
+
+services:
+  rag-api:
+    build: .
+    container_name: rag-knowledge-base
+    ports:
+      - "8000:8000"
+    volumes:
+      # 挂载数据目录，数据库持久化
+      - ./chroma_db:/app/chroma_db
+      - ./data:/app/data
+    environment:
+      # API Key 从 .env 文件读取，不要硬编码
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - HF_ENDPOINT=https://hf-mirror.com
+    restart: unless-stopped

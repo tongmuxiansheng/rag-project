@@ -4,10 +4,8 @@
 """
 from .character_splitter import CharacterSplitter
 from .recursive_splitter import RecursiveSplitter
-from .semantic_splitter import SemanticSplitter
 
 __all__ = [
     "CharacterSplitter",
     "RecursiveSplitter",
-    "SemanticSplitter",
 ]
