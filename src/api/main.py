@@ -96,13 +96,14 @@ async def root():
 
 
 @app.post("/upload", response_model=UploadResponse)
-async def upload_document(file: UploadFile = File(...)):
+async def upload_document(file: UploadFile = File(...), use_ocr: bool = False):
     """
     上传文档，自动处理并存入向量数据库
-    支持 .txt / .pdf / .docx
+    支持 .txt / .pdf / .docx / .xlsx / .xls
+    :param use_ocr: 是否启用 OCR 识别 PDF 图片中的文字（默认关闭）
     """
     # 检查文件格式
-    allowed_extensions = {'.txt', '.pdf', '.docx'}
+    allowed_extensions = {'.txt', '.pdf', '.docx', '.xlsx', '.xls'}
     ext = os.path.splitext(file.filename)[1].lower()
     if ext not in allowed_extensions:
         raise HTTPException(status_code=400, detail=f"不支持的文件格式: {ext}，支持 {allowed_extensions}")
@@ -115,14 +116,15 @@ async def upload_document(file: UploadFile = File(...)):
             tmp.write(contents)
             tmp_path = tmp.name
 
-        # 处理文档
+        # 处理文档（传递 use_ocr 参数）
         system = get_rag_system()
-        chunks_count = system.ingest(tmp_path)
+        chunks_count = system.ingest(tmp_path, use_ocr=use_ocr)
 
+        ocr_note = "（已启用OCR）" if use_ocr else ""
         return {
             "filename": file.filename,
             "chunks": chunks_count,
-            "message": f"文档上传成功，切成 {chunks_count} 块并存入数据库"
+            "message": f"文档上传成功{ocr_note}，切成 {chunks_count} 块并存入数据库"
         }
     except Exception as e:
         print("=" * 60)

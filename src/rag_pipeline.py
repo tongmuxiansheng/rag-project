@@ -35,17 +35,20 @@ class RAGPipeline:
 
         print("RAG 系统初始化完成")
 
-    def ingest(self, file_path: str) -> int:
+    def ingest(self, file_path: str, use_ocr: bool = False) -> int:
         """
         上传文档，处理后存入向量数据库
-        :param file_path: 文档路径（支持 .txt / .pdf / .docx）
+        :param file_path: 文档路径（支持 .txt / .pdf / .docx / .xlsx / .xls）
+        :param use_ocr: 是否启用 OCR 识别 PDF 图片中的文字
         :return: 存入的文档块数量
         """
         print(f"\n正在处理文档: {file_path}")
+        if use_ocr:
+            print("  （已启用 OCR 文字识别）")
 
         # 第1步：加载文档
         print("  [1/4] 加载文档...")
-        loader = get_loader(file_path)
+        loader = get_loader(file_path, use_ocr=use_ocr)
         text = loader.load()
         print(f"  文档长度: {len(text)} 字符")
 
